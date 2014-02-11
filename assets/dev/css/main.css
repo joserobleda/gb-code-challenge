@@ -1,0 +1,27 @@
+html, body {
+	background-color: #f3f3ed;
+	margin: 0;
+	font-family: 'Open Sans', arial;
+}
+
+nav {
+	background-color: #87a655;
+	height: 60px;
+	line-height: 60px;
+	color: #fff;
+}
+
+nav img, nav h1 {
+	vertical-align: middle;
+}
+
+nav h1 {
+	font-size: 20px;
+	display: inline;
+	margin-left: 1em;
+}
+
+.row {
+	width: 620px;
+	margin: 0 auto;
+}
