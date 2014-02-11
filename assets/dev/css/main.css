@@ -6,9 +6,13 @@ html, body {
 
 nav {
 	background-color: #87a655;
-	height: 60px;
 	line-height: 60px;
 	color: #fff;
+}
+
+nav .row {
+	background-color: #95b85e;
+	padding: 0 10px;
 }
 
 nav img, nav h1 {
