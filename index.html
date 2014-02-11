@@ -12,15 +12,20 @@
 
 
         <link rel="stylesheet" href="/assets/dev/css/main.css">
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="/assets/dev/js/underscore.js"></script>
         <script src="/assets/dev/js/backbone.js"></script>
     </head>
     <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+        <script type="text/template" id="userview">
+            <img src="<%= avatar_url %>" width="32px" height="32px" />
+            <span><%= login %></span>
+        </script>
+
         <nav>
             <div class="row">
+                <div id="user"></div>
                 <img src="/assets/dev/img/github.png" width="23px" height="20px" alt="github" />
                 <h1>
                     Popular repositories
@@ -28,10 +33,15 @@
             </div>
         </nav>
 
+        
+        <section id="main" class="row">
+            <ul id="repos">
+
+            </ul>
+        </section>
        
 
-        <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>-->
+        
         <script src="/assets/dev/js/app.js"></script>
     </body>
 </html>

@@ -1,7 +1,13 @@
+* {
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
 html, body {
 	background-color: #f3f3ed;
 	margin: 0;
 	font-family: 'Open Sans', arial;
+	font-size: 12px;
 }
 
 nav {
@@ -12,7 +18,7 @@ nav {
 
 nav .row {
 	background-color: #95b85e;
-	padding: 0 10px;
+	padding: 0 20px;
 }
 
 nav img, nav h1 {
@@ -28,4 +34,12 @@ nav h1 {
 .row {
 	width: 620px;
 	margin: 0 auto;
+}
+
+#user {
+	float: right;
+}
+
+#user img {
+	margin-right: 1em;
 }
