@@ -10,7 +10,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css' />
         <link rel="stylesheet" href="/assets/dev/css/main.css">
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -19,27 +19,50 @@
     </head>
     <body>
         <script type="text/template" id="userview">
-            <img src="<%= avatar_url %>" width="32px" height="32px" />
+            <img src="<%= avatar_url %>" width="32px" height="32px" alt="user" />
             <span><%= login %></span>
+        </script>
+        <script type="text/template" id="liview">
+            <a href="#<%= full_name %>">
+                <div class="end repo-props">
+                    <span><img src="assets/dev/img/star.png" /> <%= stargazers_count %></span>
+                    <span><img src="assets/dev/img/watch.png" /> <%= watchers_count %></span>
+                    <span><img src="assets/dev/img/fork.png" /> <%= forks_count %></span>
+                </div>
+
+                <h4><%= name %></h4>
+            </a>
+        </script>
+        <script type="text/template" id="repoview">
+            <p class="title">
+                <div class="end repo-props">
+                    <span><img src="assets/dev/img/star.png" /> <%= stargazers_count %></span>
+                    <span><img src="assets/dev/img/watch.png" /> <%= watchers_count %></span>
+                    <span><img src="assets/dev/img/fork.png" /> <%= forks_count %></span>
+                </div>
+                <h3><%= name %></h3> <span>· Last updated 7 days ago</span>
+            </p>
+
+            <p><%= description %></p>
+            <p class="languages">
+
+            </p>
+            <a href="#<%= owner.login %>">Back to list</a>
         </script>
 
         <nav>
             <div class="row">
-                <div id="user"></div>
-                <img src="/assets/dev/img/github.png" width="23px" height="20px" alt="github" />
+                <div id="user" class="end"></div>
+                <a href="#" title="Back to start"><img src="/assets/dev/img/github.png" width="23px" height="20px" alt="github" /></a>
                 <h1>
                     Popular repositories
                 </h1>
             </div>
         </nav>
 
-        
         <section id="main" class="row">
-            <ul id="repos">
-
-            </ul>
+            <div id="content" class="loading"></div>
         </section>
-       
 
         
         <script src="/assets/dev/js/app.js"></script>
