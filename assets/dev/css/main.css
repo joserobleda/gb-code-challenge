@@ -58,7 +58,7 @@ nav h1 {
 }
 
 #content {
-	margin: 35px 20px;
+	margin: 35px 10px;
 	border-top: 1px solid #f3f3ed;
 }
 
@@ -95,6 +95,10 @@ nav h1 {
 	color: #000;
 }
 
+#repos h4 {
+	margin: 0;
+	font-size: 14px;
+}
 
 .repo-props span {
 	color: #c9c9c3;
@@ -106,14 +110,8 @@ nav h1 {
 }
 
 
-
-
-
-
-
-#repos h4 {
-	margin: 0;
-	font-size: 14px;
+#repo {
+	padding: 0 10px;
 }
 
 #repo h3 {
