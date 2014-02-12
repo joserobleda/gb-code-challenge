@@ -11,13 +11,13 @@ html, body {
 }
 
 nav {
-	background-color: #87a655;
+	background-color: #95b85e;
 	line-height: 60px;
 	color: #fff;
 }
 
 nav .row {
-	background-color: #95b85e;
+	background-color: #87a655;
 	padding: 0 20px;
 }
 
@@ -36,10 +36,101 @@ nav h1 {
 	margin: 0 auto;
 }
 
-#user {
+.end {
 	float: right;
 }
 
+
 #user img {
 	margin-right: 1em;
+}
+
+#main {
+	border-top: 2px solid #bfccaa;
+	background-color: #fcfcfc;
+	color: #c9c9c3;
+}
+
+#main:after {
+	content: " ";
+	display: block;
+	height: 1px;
+}
+
+#content {
+	margin: 35px 20px;
+	border-top: 1px solid #f3f3ed;
+}
+
+#content.loading {
+	background: url(../img/loading.gif) no-repeat center center;
+	height: 200px
+}
+
+
+
+
+#repos {
+	margin: 0;
+	padding: 0;
+}
+
+#repos li {
+	list-style: none;
+	border-bottom: 1px solid #f3f3ed;
+	line-height: 48px;
+	padding: 0 10px;
+}
+
+#repos li:hover {
+	background-color: #f3f3ed;
+}
+
+#repos li:hover h4 {
+	color: #87a655;
+}
+
+#repos a, #repos a:visited {
+	text-decoration: none;
+	color: #000;
+}
+
+
+.repo-props span {
+	color: #c9c9c3;
+	margin-left: 1em;
+}
+
+.repo-props img {
+	vertical-align: baseline;
+}
+
+
+
+
+
+
+
+#repos h4 {
+	margin: 0;
+	font-size: 14px;
+}
+
+#repo h3 {
+	color: #87a655;
+	display: inline
+}
+
+#repo a, #repo a:visited {
+	color: #87a655;
+	text-decoration: none;
+}
+
+#repo a:hover {
+	text-decoration: underline;
+}
+
+#repo .languages {
+	background-color: #f3f3ed;
+	padding: 25px;
 }
