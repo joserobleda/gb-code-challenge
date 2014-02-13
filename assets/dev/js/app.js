@@ -19,7 +19,7 @@
 
             // prevent re-fetch when instanced from collections
             if (params.fetch === true) {
-                this.model.fetch({error: this.error.bind(this)});
+                this.model.fetch({ error: this.error.bind(this) });
             }
 
             // easy template creation
@@ -28,13 +28,13 @@
             }
         },
 
-        error: function () {
-            throw new Error("fetch error");
-        },
-
         render: function () {
             this.$el.html(this.template(this.model.attributes));
             return this;
+        },
+
+        error: function () {
+            return true;
         }
     });
 
@@ -42,7 +42,7 @@
 
         initialize: function () {
             this.listenTo(this.collection, "reset", this.render);
-            this.collection.fetch({reset: true, error: this.error.bind(this)});
+            this.collection.fetch({ reset: true, error: this.error.bind(this) });
 
             this.fragment = document.createDocumentFragment();
             return this;
@@ -52,19 +52,22 @@
             this.collection.each(this.addOne, this);
             this.$el.html(this.fragment);
 
+            // ready to append to dom
+            this.trigger('ready');
+
+            return this;
+        },
+
+        addOne: function (model) {
+
+            var view = new this.subView({ model: model, fetch: false });
+            view.render().$el.appendTo(this.fragment);
             return this;
         },
 
         error: function () {
-            throw new Error("fetch error");
-        },
-
-        addOne: function (model) {
-            var view = new this.subView({ model: model, fetch: false });
-
-            view.render().$el.appendTo(this.fragment);
-            return this;
-        },
+            return true;
+        }
     });
 
 
@@ -184,13 +187,16 @@
         render: function () {
             var languages, view;
 
-            this.$el.html(this.template(this.model.attributes));
-
 
             languages   = new Languages(this.model.attributes.languages_url);
             view        = new LanguageListView({ collection: languages });
 
-            this.$el.find("p.languages").append(view.$el);
+            languages.on('reset', function () {
+                this.$el.html(this.template(this.model.attributes));
+                this.$el.find("p.languages").append(view.$el);
+
+                this.trigger('ready');
+            }, this);
 
             return this;
         },
@@ -287,7 +293,7 @@
         el: $("#content"),
 
 
-        // Render the main/list/repo views based on the router params
+        // Render the form/list/repo views based on the router params
         render: function (username, repository) {
             this.$el.empty().addClass("loading");
 
@@ -302,15 +308,13 @@
                         model: new Repository({ full_name: username + "/" + repository })
                     });
 
-                    this.view.model.on("change", this.show.bind(this));
                 } else {
                     this.view = new RepositoryListView({
                         collection: this.user.model.getRepositories()
                     });
-
-                    this.view.collection.on("reset", this.show.bind(this));
                 }
 
+                this.view.on("ready", this.show.bind(this));
 
                 // custom error event listener, so we provide some feedback to the user 
                 this.view.on("error", this.show.bind(this));
