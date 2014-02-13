@@ -40,6 +40,12 @@ nav h1 {
 	float: right;
 }
 
+.error {
+	color: red;
+	line-height: 48px;
+}
+
+
 
 #user img {
 	margin-right: 1em;
@@ -53,8 +59,7 @@ nav h1 {
 
 #main:after {
 	content: " ";
-	display: block;
-	height: 1px;
+	display: table;
 }
 
 #content {
@@ -84,6 +89,10 @@ nav h1 {
 
 #repos li:hover {
 	background-color: #f3f3ed;
+}
+
+#repos li.error:hover {
+	background-color: transparent;
 }
 
 #repos li:hover h4 {
@@ -131,4 +140,49 @@ nav h1 {
 #repo .languages {
 	background-color: #f3f3ed;
 	padding: 25px;
+	text-align: center;
+}
+
+#repo .languages > div:after {
+	content: " ";
+	display: table;
+	clear: both;
+}
+
+
+.lang {
+	display: inline-block;
+	width: 80px;
+	font-size: 12px;
+}
+
+.lang strong {
+	display: block;
+	margin-bottom: 1em;
+}
+
+.lang span {
+	font-size: 16px;
+}
+
+
+
+form#start {
+	text-align: center;
+	padding: 60px;
+}
+
+form#start input {
+	font-family: 'Open Sans', arial;
+	padding: 10px;
+	font-size: 20px;
+	width: 100%;
+	border-radius: 2px;
+	border: 1px solid #ACACAC;
+	text-align: center;
+	outline: none;
+}
+
+form#start input:focus {
+	box-shadow: 0 0 10px -2px #757575;
 }

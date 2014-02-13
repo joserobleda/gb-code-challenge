@@ -11,11 +11,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css' />
-        <link rel="stylesheet" href="/assets/dev/css/main.css">
+        <link rel="stylesheet" href="assets/dev/css/main.css">
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script src="/assets/dev/js/underscore.js"></script>
-        <script src="/assets/dev/js/backbone.js"></script>
+        <script src="assets/dev/js/underscore.js"></script>
+        <script src="assets/dev/js/backbone.js"></script>
+        <script src="assets/dev/js/moment.min.js"></script>
     </head>
     <body>
         <script type="text/template" id="userview">
@@ -40,16 +41,21 @@
                     <span><img src="assets/dev/img/watch.png" width="13px" height="9px" /> <%= watchers_count %></span>
                     <span><img src="assets/dev/img/fork.png" width="8px" height="12px" /> <%= forks_count %></span>
                 </div>
-                <h3><%= name %></h3> <span>· Last updated 7 days ago</span>
+                <h3><%= name %></h3> <span>· Last updated <%= updated_since %></span>
             </p>
 
             <p><%= description %></p>
-            <p class="languages">
-
-            </p>
+            <p class="languages"></p>
             <a href="#<%= owner.login %>">Back to list</a>
         </script>
-
+        <script type="text/template" id="langview">
+            <strong><%= name %></strong>
+            <span><%= percent %>%</span>
+        </script>
+        <script type="text/template" id="formview">
+            <input type="text" name="username" placeholder="Type a github username and press enter" autofocus />
+        </script>
+        
         <nav>
             <div class="row">
                 <div id="user" class="end"></div>
@@ -61,10 +67,14 @@
         </nav>
 
         <section id="main" class="row">
-            <div id="content" class="loading"></div>
+            <div id="content" class="loading">
+                <form id="start">
+                    
+                </form>
+            </div>
         </section>
 
         
-        <script src="/assets/dev/js/app.js"></script>
+        <script src="assets/dev/js/app.js"></script>
     </body>
 </html>
