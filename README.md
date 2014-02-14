@@ -27,7 +27,9 @@ Option 2:
 
 ## TODO:
 
-1. Organizing modules with RequireJS and AMD
+* Organize modules with RequireJS and AMD
 
-* Load the views, templates, models and collections on demand, reducing first page load.
-* Better code readability and maintenance
+    Load the views, templates, models and collections on demand, reducing first page load  
+    Improves code readability and maintenance
+
+* Consider use [Marionette](https://github.com/marionettejs/backbone.marionette)
