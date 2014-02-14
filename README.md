@@ -23,3 +23,10 @@ Option 2:
 2. Show basic repository info
 
 ## Test:
+
+
+## TODO:
+
+1. Organizing modules with RequireJS and AMD
+· Load the views, models and collections of each page on demand, reducing first page load.
+· Better code readability and maintenance
