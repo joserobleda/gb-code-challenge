@@ -4,7 +4,8 @@ Gihub popular repositories
 ## Installation:
 
 1. clone this repo
-2. access the folder via web browser
+2. run 'node server.js 3000'
+3. open a web browser and go to http://localhost:3000
 
 ## Features:
 
