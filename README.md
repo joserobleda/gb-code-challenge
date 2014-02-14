@@ -28,5 +28,6 @@ Option 2:
 ## TODO:
 
 1. Organizing modules with RequireJS and AMD
-· Load the views, models and collections of each page on demand, reducing first page load.
-· Better code readability and maintenance
+
+* Load the views, templates, models and collections on demand, reducing first page load.
+* Better code readability and maintenance
