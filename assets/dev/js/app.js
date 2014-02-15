@@ -6,7 +6,6 @@
 
     // github api root
     api = "https://api.github.com";
-    var auth   = "?access_token=cd0484bc7dc743010a75fed6ca80dd046211e20d";
 
 
     // Common classes
@@ -135,7 +134,7 @@
         model: Language,
 
         initialize: function (url) {
-            this.url = url + auth;
+            this.url = url;
         },
 
         // github send us a key value pair, transform it into a model data
@@ -172,7 +171,7 @@
 
         // We cannot rely on backbone urlRoot because it makes an encodeURIComponent and breaks the final URL
         url: function () {
-            return api + "/repos/" + this.id + auth;
+            return api + "/repos/" + this.id;
         }
     });
 
@@ -216,7 +215,7 @@
         model: Repository,
 
         initialize: function (url) {
-            this.url = url + auth;
+            this.url = url;
         },
 
         // sort by star count and fork count from higher to lower values
