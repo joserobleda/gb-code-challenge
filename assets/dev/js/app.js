@@ -2,15 +2,14 @@
     'use strict';
     /*global Backbone, $, moment*/
 
-    var app, router, api;
+    window.App = {
+        Models: {},
+        Collections: {},
+        Views: {}
+    };
 
-    // github api root
-    api = "https://api.github.com";
 
-
-    // Common classes
-
-    var BasicView = Backbone.View.extend({
+    App.Views.BasicView = Backbone.View.extend({
         initialize: function (params) {
             params = _.extend({fetch: true}, params);
 
@@ -37,8 +36,8 @@
         }
     });
 
-    var ListView = Backbone.View.extend({
 
+    App.Views.ListView = Backbone.View.extend({
         initialize: function () {
             this.listenTo(this.collection, "reset", this.render);
             this.collection.fetch({ reset: true, error: this.error.bind(this) });
@@ -77,7 +76,7 @@
 
     //  Form classes
 
-    var FormView = Backbone.View.extend({
+    App.Views.FormView = Backbone.View.extend({
         tagName: "form",
 
         id: "start",
@@ -111,10 +110,10 @@
 
     //  Language classes
 
-    var Language = Backbone.Model.extend();
+    App.Models.Language = Backbone.Model.extend();
 
 
-    var LanguageView = BasicView.extend({
+    App.Views.LanguageView = App.Views.BasicView.extend({
         tagName: "div",
 
         className: "lang",
@@ -123,15 +122,15 @@
     });
 
 
-    var LanguageListView = ListView.extend({
+    App.Views.LanguageListView = App.Views.ListView.extend({
         tagName: "div",
 
-        subView: LanguageView
+        subView: App.Views.LanguageView
     });
 
 
-    var Languages = Backbone.Collection.extend({
-        model: Language,
+    App.Collections.Languages = Backbone.Collection.extend({
+        model: App.Models.Language,
 
         initialize: function (url) {
             this.url = url;
@@ -160,7 +159,7 @@
 
     //  Repository classes
 
-    var Repository = Backbone.Model.extend({
+    App.Models.Repository = Backbone.Model.extend({
         idAttribute: "full_name",
 
         // Add a easily readable "updated_since" property to github repo object
@@ -171,12 +170,12 @@
 
         // We cannot rely on backbone urlRoot because it makes an encodeURIComponent and breaks the final URL
         url: function () {
-            return api + "/repos/" + this.id;
+            return "https://api.github.com/repos/" + this.id;
         }
     });
 
 
-    var RepositoryView = BasicView.extend({
+    App.Views.RepositoryView = App.Views.BasicView.extend({
         tagName: "div",
 
         id: "repo",
@@ -187,8 +186,8 @@
             var languages, view;
 
 
-            languages   = new Languages(this.model.attributes.languages_url);
-            view        = new LanguageListView({ collection: languages });
+            languages   = new App.Collections.Languages(this.model.attributes.languages_url);
+            view        = new App.Views.LanguageListView({ collection: languages });
 
             languages.on('reset', function () {
                 this.$el.html(this.template(this.model.attributes));
@@ -211,8 +210,8 @@
     });
 
 
-    var Repositories = Backbone.Collection.extend({
-        model: Repository,
+    App.Collections.Repositories = Backbone.Collection.extend({
+        model: App.Models.Repository,
 
         initialize: function (url) {
             this.url = url;
@@ -229,19 +228,19 @@
     });
 
 
-    var RepositoryLiView = BasicView.extend({
+    App.Views.RepositoryLiView = App.Views.BasicView.extend({
         tagName: "li",
 
         template: "liview"
     });
 
 
-    var RepositoryListView = ListView.extend({
+    App.Views.RepositoryListView = App.Views.ListView.extend({
         tagName: "ul",
 
         id: "repos",
 
-        subView: RepositoryLiView,
+        subView: App.Views.RepositoryLiView,
 
         error: function () {
             this.$el.html("<li class=\"error\">Whoops, we can't find the username in github. Do you write the username correctly?</li>");
@@ -260,19 +259,19 @@
 
     //  User classes
 
-    var User = Backbone.Model.extend({
+    App.Models.User = Backbone.Model.extend({
         idAttribute: "login",
 
-        urlRoot: api + "/users",
+        urlRoot: "https://api.github.com/users",
 
         getRepositories: function () {
-            var url = api + "/users/" + this.id + "/repos";
+            var url = "https://api.github.com/users/" + this.id + "/repos";
 
-            return new Repositories(url);
+            return new App.Collection.Repositories(url);
         }
     });
 
-    var UserView = BasicView.extend({
+    App.Views.UserView = App.Views.BasicView.extend({
         el: $("#user"),
 
         template: "userview"
@@ -284,9 +283,8 @@
 
 
 
-    // Main handlers
 
-    var App = Backbone.View.extend({
+    App.Views.MainView = Backbone.View.extend({
 
         // Base the view on an existing element
         el: $("#content"),
@@ -297,18 +295,18 @@
             this.$el.empty().addClass("loading");
 
             if (username) {
-                this.user = new UserView({
-                    model: new User({ login: username })
+                this.user = new App.Views.UserView({
+                    model: new App.Models.User({ login: username })
                 });
 
                 // draw a single repo or a list
                 if (repository) {
-                    this.view = new RepositoryView({
+                    this.view = new App.Views.RepositoryView({
                         model: new Repository({ full_name: username + "/" + repository })
                     });
 
                 } else {
-                    this.view = new RepositoryListView({
+                    this.view = new App.View.RepositoryListView({
                         collection: this.user.model.getRepositories()
                     });
                 }
@@ -318,7 +316,7 @@
                 // custom error event listener, so we provide some feedback to the user 
                 this.view.on("error", this.show.bind(this));
             } else {
-                this.view = new FormView();
+                this.view = new App.Views.FormView();
                 this.show();
 
                 if (this.user) {
@@ -335,18 +333,18 @@
     });
 
 
-    app = new App();
+    var mainView = new App.Views.MainView();
 
     var Router = Backbone.Router.extend({
         routes: {
-            "":             app.render.bind(app),
-            ":user":        app.render.bind(app),
-            ":user/:repo":  app.render.bind(app)
+            "":             mainView.render.bind(mainView),
+            ":user":        mainView.render.bind(mainView),
+            ":user/:repo":  mainView.render.bind(mainView)
         }
     });
 
 
-    router = new Router();
+    new Router();
     Backbone.history.start();
 
 }());
