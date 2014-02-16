@@ -24,10 +24,10 @@ describe("Respository Model", function() {
 	it("should has attributes attributes on fetch", function() {
 		this.repository.fetch();
 		this.server.respond(); 
-		
-	
+
 		expect(Object.keys(this.repository.attributes).length).toBeGreaterThan(1);
 	});
+
 
 	it("should fire the change event on fetch", function() {
 		var callback = sinon.spy();
@@ -39,5 +39,16 @@ describe("Respository Model", function() {
 		expect(callback.called).toBeTruthy();
 	});
 
+
+	it("should has the updated_since attribute", function() {
+		this.repository.fetch();
+
+		// undefined on instance
+		expect(this.repository.get('updated_since')).toBeUndefined();
+		this.server.respond(); 
+
+		// defined after fetch
+		expect(this.repository.get('updated_since')).not.toBeUndefined();
+	});
 
 });
