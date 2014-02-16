@@ -20,11 +20,6 @@
             if (params.fetch === true) {
                 this.model.fetch({ error: this.error.bind(this) });
             }
-
-            // pre-fetch template creation
-            if (typeof this.template === "string") {
-                this.template = _.template($("#" + this.template).html());
-            }
         },
 
         render: function () {
