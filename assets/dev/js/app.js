@@ -347,7 +347,7 @@
             var tmpl = view.prototype.template;
 
             if (typeof tmpl == 'string') {
-                var ajax = $.get('templates/' + tmpl + '.html', function (res) {
+                var ajax = $.get('/templates/' + tmpl + '.html', function (res) {
                     view.prototype.template = _.template(res);
                 });
 

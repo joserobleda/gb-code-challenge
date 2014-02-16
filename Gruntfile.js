@@ -6,7 +6,7 @@ module.exports = function(grunt) {
 				src: ['assets/dev/js/jquery.js', 'assets/dev/js/underscore.js', 'assets/dev/js/backbone.js', 'assets/dev/js/app.js'],
 				options: {
 					specs: 'test/spec/*.js',
-					helpers: 'test/*Helper.js'
+					helpers: 'test/lib/sinon-1.8.2.js'
 				}
 			}
 		}
