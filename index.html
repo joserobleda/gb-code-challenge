@@ -18,46 +18,7 @@
         <script src="assets/dev/js/backbone.js"></script>
         <script src="assets/dev/js/moment.js"></script>
     </head>
-    <body>
-        <script type="text/template" id="userview">
-            <img src="<%= avatar_url %>" width="32px" height="32px" alt="user" />
-            <span><%= login %></span>
-        </script>
-        <script type="text/template" id="liview">
-            <a href="#<%= full_name %>">
-                <div class="end repo-props">
-                    <span><img src="assets/dev/img/star.png" width="11px" height="10px" /> <%= stargazers_count %></span>
-                    <span><img src="assets/dev/img/watch.png" width="13px" height="9px" /> <%= watchers_count %></span>
-                    <span><img src="assets/dev/img/fork.png" width="8px" height="12px" /> <%= forks_count %></span>
-                </div>
-
-                <h4><%= name %></h4>
-            </a>
-        </script>
-        <script type="text/template" id="repoview">
-            <p class="title">
-                <div class="end repo-props">
-                    <span><img src="assets/dev/img/star.png" width="11px" height="10px" /> <%= stargazers_count %></span>
-                    <span><img src="assets/dev/img/watch.png" width="13px" height="9px" /> <%= watchers_count %></span>
-                    <span><img src="assets/dev/img/fork.png" width="8px" height="12px" /> <%= forks_count %></span>
-                </div>
-                <h3><%= name %></h3> <span>· Last updated <%= updated_since %></span>
-            </p>
-
-            <p><%= description %></p>
-            <p class="languages"></p>
-            <a href="#<%= owner.login %>">Back to list</a> 
-            |
-            <a href="<%= html_url %>">View it on github</a>
-        </script>
-        <script type="text/template" id="langview">
-            <strong><%= name %></strong>
-            <span><%= percent %>%</span>
-        </script>
-        <script type="text/template" id="formview">
-            <input type="text" name="username" placeholder="Type a github username and press enter" autofocus />
-        </script>
-        
+    <body>        
         <nav>
             <div class="row">
                 <div id="user" class="end"></div>

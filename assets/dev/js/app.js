@@ -5,7 +5,8 @@
     window.App = {
         Models: {},
         Collections: {},
-        Views: {}
+        Views: {},
+        Router: null
     };
 
 
@@ -20,7 +21,7 @@
                 this.model.fetch({ error: this.error.bind(this) });
             }
 
-            // easy template creation
+            // pre-fetch template creation
             if (typeof this.template === "string") {
                 this.template = _.template($("#" + this.template).html());
             }
@@ -85,7 +86,7 @@
             "submit": "submit"
         },
 
-        template: _.template($("#formview").html()),
+        template: _.template('<input type="text" name="username" placeholder="Type a github username and press enter" autofocus />'),
 
         initialize: function () {
             this.$el.html(this.template()).attr('action', '#');
@@ -95,7 +96,7 @@
             e.preventDefault();
 
             var username = this.$el.find('input').val();
-            router.navigate(username, {trigger: true});
+            App.Router.navigate(username, {trigger: true});
 
             return true;
         }
@@ -267,7 +268,7 @@
         getRepositories: function () {
             var url = "https://api.github.com/users/" + this.id + "/repos";
 
-            return new App.Collection.Repositories(url);
+            return new App.Collections.Repositories(url);
         }
     });
 
@@ -302,11 +303,11 @@
                 // draw a single repo or a list
                 if (repository) {
                     this.view = new App.Views.RepositoryView({
-                        model: new Repository({ full_name: username + "/" + repository })
+                        model: new App.Models.Repository({ full_name: username + "/" + repository })
                     });
 
                 } else {
-                    this.view = new App.View.RepositoryListView({
+                    this.view = new App.Views.RepositoryListView({
                         collection: this.user.model.getRepositories()
                     });
                 }
@@ -344,7 +345,29 @@
     });
 
 
-    new Router();
-    Backbone.history.start();
+    // Preload al templates
+    function loadTemplates (cb) {
+        var i, tmpl, ajax, promises = [];
+        _.each(App.Views, function (view) {
+            var tmpl = view.prototype.template;
+
+            if (typeof tmpl == 'string') {
+                var ajax = $.get('templates/' + tmpl + '.html', function (res) {
+                    view.prototype.template = _.template(res);
+                });
+
+                promises.push(ajax);
+            }
+        });
+
+        $.when.apply($, promises).done(cb);
+    };
+
+    App.Router = new Router();
+
+    // preload templates and run the app
+    loadTemplates(function () {
+        Backbone.history.start();
+    })
 
 }());
