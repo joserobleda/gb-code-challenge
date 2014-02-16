@@ -1,4 +1,4 @@
-Gihub popular repositories
+Gihub popular repositories [![Build Status](https://travis-ci.org/joserobleda/gb-code-challenge.png?branch=master)](https://travis-ci.org/joserobleda/gb-code-challenge)
 =================
 
 ## Installation:
