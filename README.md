@@ -24,7 +24,13 @@ Option 2:
 
 ## Test:
 
-Install grunt `npm install grunt grunt-contrib-jasmine` 
+Install grunt and jasmine
+`````
+npm install -g grunt
+npm install grunt-contrib-jasmine
+npm install -g grunt-cli
+npm link grunt
+`````
 
 Run `grunt jasmine`
 
