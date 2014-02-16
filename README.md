@@ -24,6 +24,10 @@ Option 2:
 
 ## Test:
 
+Install grunt `npm install grunt grunt-contrib-jasmine` 
+
+Run `grunt jasmine`
+
 
 ## TODO:
 
@@ -31,5 +35,8 @@ Option 2:
 
     Load the views, templates, models and collections on demand, reducing first page load  
     Improves code readability and maintenance
+    Better test by testing each piece in a separate context
+    
+* Minify the files
 
 * Consider use [Marionette](https://github.com/marionettejs/backbone.marionette)
