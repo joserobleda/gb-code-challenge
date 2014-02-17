@@ -37,6 +37,8 @@ Run `grunt jasmine`
 
 ## TODO:
 
+* Write more test
+
 * Organize modules with RequireJS and AMD
 
     Load the views, templates, models and collections on demand, reducing first page load  
