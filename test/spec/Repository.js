@@ -30,13 +30,14 @@ describe("Respository Model", function() {
 
 
 	it("should fire the change event on fetch", function() {
-		var callback = sinon.spy();
+		var spy 	= jasmine.createSpy('onChange');
 
-		this.repository.bind('change', callback);
+
+		this.repository.bind('change', spy);
 		this.repository.fetch();
 		this.server.respond(); 
 
-		expect(callback.called).toBeTruthy();
+		expect(spy).toHaveBeenCalled();
 	});
 
 
