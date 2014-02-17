@@ -12,7 +12,7 @@ Option 1:
 
 Option 2:
 
-1. clone this repo in the root of your favourite web server
+1. clone this repo in the root of your favorite web server
 2. open a web browser and go to `http://localhost/gb-code-challenge`
 
 
@@ -37,7 +37,7 @@ Run `grunt jasmine`
 
 ## TODO:
 
-* Write more test
+* Write more tests
 
 * Organize modules with RequireJS and AMD
 
