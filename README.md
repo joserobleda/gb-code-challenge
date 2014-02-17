@@ -42,7 +42,7 @@ Run `grunt jasmine`
 * Organize modules with RequireJS and AMD
 
     Load the views, templates, models and collections on demand, reducing first page load  
-    Improves code readability and maintenance
+    Improves code readability and maintenance  
     Better test by testing each piece in a separate context
     
 * Minify the files
