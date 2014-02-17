@@ -340,7 +340,7 @@
     });
 
 
-    // Preload al templates
+    // Preload al templates - easier testing
     function loadTemplates (cb) {
         var i, tmpl, ajax, promises = [];
         _.each(App.Views, function (view) {
