@@ -13,7 +13,7 @@ describe("Respository Model", function() {
 	});
 
 	it("should exist", function() {
-		expect(App.Models.Repository).toBeDefined()
+		expect(App.Models.Repository).toBeDefined();
 	});
 
 	it("should have the idAttribute property as the object id", function () {
